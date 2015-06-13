@@ -1,0 +1,29 @@
+<h1>TodoList</h1>
+<%= render  "form" %>
+<%= render  "nav"%>
+<div>
+	<br>
+	<% @todos.each do |todo| %>
+	<p>
+		<% if  todo.completed? %>
+				<div  class = "cpl">	
+				<%= todo.content %>
+				</div>				
+		<% else %>
+			<%= todo.content %>
+		<% end %>
+
+		
+		<% if  todo.active? %>
+			<%= link_to "Done", complete_todo_path(todo), method: "post" %>
+		<% else %>
+			<%= link_to "Undo", active_todo_path(todo), method: "post" %>
+		<% end %>
+		
+		<%= link_to "Edit", edit_todo_path(todo) %>
+		<%= link_to "Delete", todo_path(todo) , method:"delete" ,data: { confirm: "Delete?" }%>
+		
+		
+	</p>
+	<% end %>
+</div>
